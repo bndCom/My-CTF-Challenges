@@ -1,6 +1,8 @@
 # TCP
 
-**`Author:`** [bnd](https://github.com/bndCom)
+**`Category:`** Digital Forensics  
+**`CTF:`** Shellmates Ramadan Challenges 2025  
+**`Author:`** [bnd](https://www.linkedin.com/in/anesbendaoud/)
 
 ## Description
 

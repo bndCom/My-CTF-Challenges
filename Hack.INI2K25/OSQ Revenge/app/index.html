@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>welcome</title>
+</head>
+<?php
+
+$upload_dir = __DIR__ . '/upl04ds';
+
+if (!is_dir($upload_dir)) {
+    mkdir($upload_dir, 0777, true);
+}
+
+if (isset($_POST['upload'])) {
+    $filename = $_FILES['file']['name'];
+    $tmp_name = $_FILES['file']['tmp_name'];
+
+    move_uploaded_file($tmp_name, "$upload_dir/$filename");
+
+    echo "<p>File uploaded as: <code>$filename</code></p>";
+}
+
+// vulnerable to LFI!!
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+
+    include($upload_dir . '/' . $page);
+}
+
+?>
+<body>
+    <h2>Upload a File</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit" name="upload">Upload</button>
+    </form>
+
+    <h2>View Uploaded File</h2>
+    <form method="GET">
+        <input type="text" name="page" placeholder="file.txt" required>
+        <button type="submit">Include File</button>
+    </form>
+    <!-- web apps are common as an initial attack vector! here is your flag: shellmates{W3B_Lf1_2Rc3 -->
+</body>
+</html>
